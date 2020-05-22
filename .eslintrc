@@ -1,0 +1,30 @@
+{
+    "ignorePatterns": ["public", "server.js"],
+    "settings": {
+      "react": {
+        "version": "latest",
+      },
+    },
+    "env": {
+      "commonjs": true,
+      "es6": true,
+      "node": true,
+      "jest/globals": true
+    },
+    "extends": [
+      "plugin:jsx-a11y/recommended"
+    ],
+    "plugins": [
+      "react",
+      "jsx-a11y",
+      "jest"
+    ],
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": 2018
+    },
+    "rules": {
+      "no-console": "error"
+    },
+    "parser":"babel-eslint"
+  }
