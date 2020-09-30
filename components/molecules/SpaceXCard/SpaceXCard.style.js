@@ -36,6 +36,13 @@ const StyledXCard = styled.div`
   .SpaceXCard__Missions {
     margin-bottom: 5px;
     font-size: .8rem;
+
+    ul {
+      padding: 0 2rem;
+      li {
+        list-style-type: disc;
+      }
+    }
   }
 
   .SpaceXCard__LaunchYear {

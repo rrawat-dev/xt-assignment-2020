@@ -3,6 +3,9 @@ import { COLORS } from '../../../styles/variables';
 import { device } from '../../../styles/device.breakpoints';
 
 const StyledSpaceXFilter = styled.div`
+  max-width: 350px;
+  margin: 0 auto;
+
   h3 {
     margin: 10px auto;
     color: ${COLORS.BLACK};
