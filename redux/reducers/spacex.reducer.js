@@ -1,9 +1,7 @@
 import {
   FETCH_SPACEX_SUCCESS,
   FETCH_SPACEX_ERROR,
-  SET_SPACEX_YEAR_FILTER,
-  SET_SPACEX_LAUNCH_FILTER,
-  SET_SPACEX_LAND_FILTER
+  SET_SPACEX_FILTERS
 } from '../actions/spacex.actions';
 
 const DEFAULT_STATE = {
@@ -30,28 +28,12 @@ export default function spacex(spacex = DEFAULT_STATE, action) {
           ...spacex,
           data: []
         };
-      case SET_SPACEX_YEAR_FILTER:
+      case SET_SPACEX_FILTERS:
         return {
           ...spacex,
           filters: {
             ...spacex.filters,
-            year: action.payload
-          }
-        };
-      case SET_SPACEX_LAUNCH_FILTER:
-        return {
-          ...spacex,
-          filters: {
-            ...spacex.filters,
-            launch_success: action.payload
-          }
-        };
-      case SET_SPACEX_LAND_FILTER:
-        return {
-          ...spacex,
-          filters: {
-            ...spacex.filters,
-            land_success: action.payload
+            ...action.payload
           }
         };
       default:

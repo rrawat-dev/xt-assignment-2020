@@ -37040,7 +37040,7 @@ module.exports = function(originalModule) {
 /*!*****************************************!*\
   !*** ./redux/actions/spacex.actions.js ***!
   \*****************************************/
-/*! exports provided: FETCH_SPACEX_SUCCESS, FETCH_SPACEX_ERROR, SHOW_FULLPAGE_LOADER, SET_SPACEX_YEAR_FILTER, SET_SPACEX_LAUNCH_FILTER, SET_SPACEX_LAND_FILTER, showFullPageLoaderAction, fetchSpaceXDataAsyncAction, fetchSpaceXDataSuccessAction */
+/*! exports provided: FETCH_SPACEX_SUCCESS, FETCH_SPACEX_ERROR, SHOW_FULLPAGE_LOADER, SET_SPACEX_FILTERS, showFullPageLoaderAction, setSpaceXFilters, fetchSpaceXDataAsyncAction, fetchSpaceXDataSuccessAction */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -37048,10 +37048,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_SPACEX_SUCCESS", function() { return FETCH_SPACEX_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_SPACEX_ERROR", function() { return FETCH_SPACEX_ERROR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SHOW_FULLPAGE_LOADER", function() { return SHOW_FULLPAGE_LOADER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SPACEX_YEAR_FILTER", function() { return SET_SPACEX_YEAR_FILTER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SPACEX_LAUNCH_FILTER", function() { return SET_SPACEX_LAUNCH_FILTER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SPACEX_LAND_FILTER", function() { return SET_SPACEX_LAND_FILTER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SPACEX_FILTERS", function() { return SET_SPACEX_FILTERS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showFullPageLoaderAction", function() { return showFullPageLoaderAction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setSpaceXFilters", function() { return setSpaceXFilters; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSpaceXDataAsyncAction", function() { return fetchSpaceXDataAsyncAction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchSpaceXDataSuccessAction", function() { return fetchSpaceXDataSuccessAction; });
 /* harmony import */ var _services_spacex_spacex_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../services/spacex/spacex.service */ "./services/spacex/spacex.service.js");
@@ -37059,18 +37058,23 @@ __webpack_require__.r(__webpack_exports__);
 var FETCH_SPACEX_SUCCESS = 'FETCH_SPACEX_SUCCESS';
 var FETCH_SPACEX_ERROR = 'FETCH_SPACEX_ERROR';
 var SHOW_FULLPAGE_LOADER = 'SHOW_FULLPAGE_LOADER';
-var SET_SPACEX_YEAR_FILTER = 'SET_SPACEX_YEAR_FILTER';
-var SET_SPACEX_LAUNCH_FILTER = 'SET_SPACEX_LAUNCH_FILTER';
-var SET_SPACEX_LAND_FILTER = 'SET_SPACEX_LAND_FILTER';
+var SET_SPACEX_FILTERS = 'SET_SPACEX_FILTERS';
 function showFullPageLoaderAction(showFullPageLoader) {
   return {
     type: SHOW_FULLPAGE_LOADER,
     payload: showFullPageLoader
   };
 }
+function setSpaceXFilters(filters) {
+  return {
+    type: SET_SPACEX_FILTERS,
+    payload: filters
+  };
+}
 function fetchSpaceXDataAsyncAction(options) {
   return function (dispatch) {
     dispatch(showFullPageLoaderAction(true));
+    dispatch(setSpaceXFilters(options));
     return Object(_services_spacex_spacex_service__WEBPACK_IMPORTED_MODULE_0__["fetchSpaceXData"])(options).then(function (data) {
       dispatch(fetchSpaceXDataSuccessAction(data));
       dispatch(showFullPageLoaderAction(false));
@@ -37181,25 +37185,9 @@ function spacex() {
         data: []
       });
 
-    case _actions_spacex_actions__WEBPACK_IMPORTED_MODULE_1__["SET_SPACEX_YEAR_FILTER"]:
+    case _actions_spacex_actions__WEBPACK_IMPORTED_MODULE_1__["SET_SPACEX_FILTERS"]:
       return _objectSpread(_objectSpread({}, spacex), {}, {
-        filters: _objectSpread(_objectSpread({}, spacex.filters), {}, {
-          year: action.payload
-        })
-      });
-
-    case _actions_spacex_actions__WEBPACK_IMPORTED_MODULE_1__["SET_SPACEX_LAUNCH_FILTER"]:
-      return _objectSpread(_objectSpread({}, spacex), {}, {
-        filters: _objectSpread(_objectSpread({}, spacex.filters), {}, {
-          launch_success: action.payload
-        })
-      });
-
-    case _actions_spacex_actions__WEBPACK_IMPORTED_MODULE_1__["SET_SPACEX_LAND_FILTER"]:
-      return _objectSpread(_objectSpread({}, spacex), {}, {
-        filters: _objectSpread(_objectSpread({}, spacex.filters), {}, {
-          land_success: action.payload
-        })
+        filters: _objectSpread(_objectSpread({}, spacex.filters), action.payload)
       });
 
     default:
@@ -37275,7 +37263,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function fetchSpaceXData(options) {
   var url = 'https://api.spacexdata.com/v3/launches';
-  console.log('@@@@@@ ', options);
   return _http_http_service__WEBPACK_IMPORTED_MODULE_1__["default"].get(url, {
     params: _objectSpread({}, options)
   }).then(function (res) {

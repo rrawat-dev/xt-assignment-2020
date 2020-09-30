@@ -3,9 +3,8 @@ import { fetchSpaceXData } from '../../services/spacex/spacex.service';
 export const FETCH_SPACEX_SUCCESS = 'FETCH_SPACEX_SUCCESS';
 export const FETCH_SPACEX_ERROR = 'FETCH_SPACEX_ERROR';
 export const SHOW_FULLPAGE_LOADER = 'SHOW_FULLPAGE_LOADER';
-export const SET_SPACEX_YEAR_FILTER = 'SET_SPACEX_YEAR_FILTER';
-export const SET_SPACEX_LAUNCH_FILTER = 'SET_SPACEX_LAUNCH_FILTER';
-export const SET_SPACEX_LAND_FILTER = 'SET_SPACEX_LAND_FILTER';
+export const SET_SPACEX_FILTERS = 'SET_SPACEX_FILTERS';
+
 
 export function showFullPageLoaderAction(showFullPageLoader) {
   return {
@@ -14,9 +13,17 @@ export function showFullPageLoaderAction(showFullPageLoader) {
   };
 }
 
+export function setSpaceXFilters(filters) {
+  return {
+    type: SET_SPACEX_FILTERS,
+    payload: filters
+  };
+}
+
 export function fetchSpaceXDataAsyncAction(options) {
   return (dispatch) => {
     dispatch(showFullPageLoaderAction(true));
+    dispatch(setSpaceXFilters(options));
     return fetchSpaceXData(options).then((data) => {
       dispatch(fetchSpaceXDataSuccessAction(data));
       dispatch(showFullPageLoaderAction(false));

@@ -4,7 +4,7 @@ import { fetchSpaceXDataAsyncAction } from '../redux/actions/spacex.actions';
 
 export default class Home extends Component {
   static async getServerSideProps({req, store}) {
-    const options = {"params": req.query || {}};
+    const options = req.query || {};
     return store.dispatch(fetchSpaceXDataAsyncAction(options));
   }
 
