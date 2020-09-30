@@ -10,5 +10,10 @@ const StyledSpaceXLaunches = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
   }
+
+  .SpaceXLaunches__NoResult {
+    text-align: center;
+    margin: 1rem;
+  }
 `;
 export default StyledSpaceXLaunches;

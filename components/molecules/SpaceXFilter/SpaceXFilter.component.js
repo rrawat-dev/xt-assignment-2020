@@ -16,9 +16,10 @@ const SpaceXFilter = (props) => {
       <h3>{title}</h3>
       <ul>
       {
-        filters.map((filter) => (
-          <li>
+        filters.map((filter, index) => (
+          <li key={index}>
             <button
+              className={selectedFilter === filter.value ? 'active' : ''}
               onClick={() => onFilterClick(filter.value)}
             >{filter.label}</button>
           </li>

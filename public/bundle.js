@@ -37045,7 +37045,7 @@ module.exports = function(originalModule) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_SPACEX_SUCCESS", function() { return FETCH_SPACEX_SUCCESS; });
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_SPACEX_SUCCESS", function() { return FETCH_SPACEX_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FETCH_SPACEX_ERROR", function() { return FETCH_SPACEX_ERROR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SHOW_FULLPAGE_LOADER", function() { return SHOW_FULLPAGE_LOADER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_SPACEX_FILTERS", function() { return SET_SPACEX_FILTERS; });
@@ -37075,6 +37075,16 @@ function fetchSpaceXDataAsyncAction(options) {
   return function (dispatch) {
     dispatch(showFullPageLoaderAction(true));
     dispatch(setSpaceXFilters(options));
+
+    if (global.history) {
+      var qstr = Object.keys(options).filter(function (key) {
+        return !!options[key];
+      }).map(function (key) {
+        return "".concat(key, "=").concat(options[key]);
+      }).join('&');
+      global.history.pushState(null, '', "".concat(global.location.pathname, "?").concat(qstr));
+    }
+
     return Object(_services_spacex_spacex_service__WEBPACK_IMPORTED_MODULE_0__["fetchSpaceXData"])(options).then(function (data) {
       dispatch(fetchSpaceXDataSuccessAction(data));
       dispatch(showFullPageLoaderAction(false));
@@ -37089,6 +37099,7 @@ function fetchSpaceXDataSuccessAction(data) {
     payload: data
   };
 }
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -37414,8 +37425,8 @@ var COLORS = {
   GRAY: '#f2f2f2',
   WHITE: '#FFF',
   BLACK: '#000',
-  LIGHT_GREEN: '#9cd29c',
-  HIGHLIGHT_GREEN: '#59d459',
+  LIGHT_GREEN: '#aeeaae',
+  HIGHLIGHT_GREEN: '#79b179',
   BLUE: '#497fe0'
 };
 

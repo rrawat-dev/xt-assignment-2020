@@ -20,6 +20,10 @@ const StyledHomePage = styled.div`
       flex: 1;
     }
   }
+
+  footer {
+    text-align: center;
+  }
 `;
 
 export default StyledHomePage;

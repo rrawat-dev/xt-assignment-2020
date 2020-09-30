@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import SpaceXCard from '../../molecules/SpaceXCard/SpaceXCard.component';
 import StyledSpaceXLaunches from './SpaceXLaunches.style';
 
 const SpaceXLaunches = () => {
-  const { data = [], error = false, isFetching = false } = useSelector(state => state.spacex);
+  const { data = {}, error = false, isFetching = false } = useSelector(state => state.spacex);
+  const resultKeys = Object.keys(data);
 
   if (isFetching) {
     return (
@@ -19,19 +20,25 @@ const SpaceXLaunches = () => {
     );
   }
 
-  if (data.length === 0) {
+  if (resultKeys.length === 0) {
     return (
-      <div>no result found</div>
+      <StyledSpaceXLaunches>
+        <div className="SpaceXLaunches__NoResult">
+          Sorry, no result available for your search.
+        </div>
+      </StyledSpaceXLaunches>
     );
   }
 
   return (
     <StyledSpaceXLaunches>
       {
-        Object.keys(data).map((key) => {
+        resultKeys.map((key, index) => {
           const launch = data[key];
           return (
-            <SpaceXCard launch={launch} />
+            <Fragment key={index}>
+              <SpaceXCard launch={launch} />
+            </Fragment>
           )
         })
       }

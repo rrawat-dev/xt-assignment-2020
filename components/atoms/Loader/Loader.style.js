@@ -26,10 +26,10 @@ const StyledLoader = styled.div`
         width: 64px;
         height: 64px;
         margin: 8px;
-        border: 8px solid ${COLORS.orange};
+        border: 8px solid ${COLORS.HIGHLIGHT_GREEN};
         border-radius: 50%;
         animation: LoaderAnimation 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border-color: ${COLORS.orange} transparent transparent transparent;
+        border-color: ${COLORS.HIGHLIGHT_GREEN} transparent transparent transparent;
         left: 50%;
         top: 50%;
 

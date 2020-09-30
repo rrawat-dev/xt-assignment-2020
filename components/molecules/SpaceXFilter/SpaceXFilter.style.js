@@ -37,7 +37,8 @@ const StyledSpaceXFilter = styled.div`
       border-radius: 3px;
       padding: 10px 50px;
       font-size: 1rem;
-
+      cursor: pointer;
+  
       &:hover,
       &.active {
         background: ${COLORS.HIGHLIGHT_GREEN};

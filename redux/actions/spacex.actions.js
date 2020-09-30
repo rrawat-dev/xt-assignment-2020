@@ -24,6 +24,18 @@ export function fetchSpaceXDataAsyncAction(options) {
   return (dispatch) => {
     dispatch(showFullPageLoaderAction(true));
     dispatch(setSpaceXFilters(options));
+
+    if (global.history) {
+      const qstr = Object.keys(options)
+        .filter(key => !!options[key])
+        .map(key => `${key}=${options[key]}`).join('&');
+      global.history.pushState(
+        null,
+        '',
+        `${global.location.pathname}?${qstr}`
+      );
+    }
+
     return fetchSpaceXData(options).then((data) => {
       dispatch(fetchSpaceXDataSuccessAction(data));
       dispatch(showFullPageLoaderAction(false));
